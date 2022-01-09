@@ -34,15 +34,15 @@ public class GerenciadorUsersApplication {
 		SpringApplication.run(GerenciadorUsersApplication.class, args);
 	}
 
+
 	@Bean
 	public ConfigurableJWTProcessor configurableJWTProcessor() throws MalformedURLException {
-		ResourceRetriever resourceRetriever = new DefaultResourceRetriever(connectionTimeout,readTimeout);
-
+		ResourceRetriever resourceRetriever = new DefaultResourceRetriever(connectionTimeout, readTimeout);
 		URL jwkURL = new URL(jwkUrl);
 		JWKSource jwkSource = new RemoteJWKSet(jwkURL, resourceRetriever);
 		ConfigurableJWTProcessor jwtProcessor = new DefaultJWTProcessor();
 		JWSKeySelector keySelector = new JWSVerificationKeySelector(JWSAlgorithm.RS256, jwkSource);
-		jwtProcessor.setJWEKeySelector((JWEKeySelector) keySelector);
+		jwtProcessor.setJWSKeySelector(keySelector);
 		return jwtProcessor;
 	}
 
