@@ -12,11 +12,11 @@ import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 
 const routes: Routes = [
-  // { path: '', component: LoginComponent, canActivate: [LoginGuard] },
+   { path: '', component: LoginComponent, canActivate: [LoginGuard] },
   { path: 'home', component: HomeComponent, canActivate: [HomeGuard] },
   { path: 'login', component: LoginComponent, canActivate: [LoginGuard] },
   { path: 'signup', component: SignupComponent, canActivate: [LoginGuard] },
-  { path: '', component: ListComponent },
+  //{ path: '', component: ListComponent },
   { path: 'detail', component: DetailComponent },
   { path: 'create', component: CreateComponent },
   { path: 'update', component: UpdateComponent },

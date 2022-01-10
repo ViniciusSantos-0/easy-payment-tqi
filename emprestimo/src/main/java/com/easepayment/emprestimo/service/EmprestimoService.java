@@ -61,7 +61,6 @@ public class EmprestimoService {
     }
 
     public EmprestimoDetailsTdo findById(Long id) {
-
         Emprestimo emprestimo = repository.findById(id).get();
         return modelMapper.map(emprestimo, EmprestimoDetailsTdo.class);
 

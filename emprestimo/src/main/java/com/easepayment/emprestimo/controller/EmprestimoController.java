@@ -29,6 +29,9 @@ public class EmprestimoController {
         System.out.println("recuperando dados do banco");
         return repository.findAll();
     }
+
+
+
     @PostMapping
     public void  save(@RequestBody Emprestimo emprestimo)throws IOException{
         System.out.println("Salvando"+ emprestimo.getId());
