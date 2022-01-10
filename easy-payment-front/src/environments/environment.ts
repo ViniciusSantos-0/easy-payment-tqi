@@ -9,7 +9,8 @@ export const environment = {
   springURL: 'http://localhost:8080/',
   ACCESS_TOKEN: 'accessToken',
   AUTHORIZATION: 'Authorization',
-  BEARER: 'Bearer '
+  BEARER: 'Bearer ',
+  clienteURL: 'https://6pxtv40zbh.execute-api.us-east-2.amazonaws.com/dev/cliente/'
 };
 
 /*

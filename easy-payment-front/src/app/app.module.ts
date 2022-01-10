@@ -11,6 +11,14 @@ import { SignupComponent } from './signup/signup.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { interceptorStringProvider } from './interceptors/api-rest.interceptor';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+//external
+import { NgxSpinnerModule } from "ngx-spinner";
+import { ListComponent } from './cliente/list.component';
+import { CreateComponent } from './cliente/create.component';
+import { UpdateComponent } from './cliente/update.component';
+import { DetailComponent } from './cliente/detail.component';
 
 
 @NgModule({
@@ -19,10 +27,16 @@ import { interceptorStringProvider } from './interceptors/api-rest.interceptor';
     LoginComponent,
     HomeComponent,
     MenuComponent,
-    SignupComponent
+    SignupComponent,
+    ListComponent,
+    CreateComponent,
+    UpdateComponent,
+    DetailComponent
   ],
   imports: [
     BrowserModule,
+    NgxSpinnerModule,
+    BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
     AppRoutingModule
