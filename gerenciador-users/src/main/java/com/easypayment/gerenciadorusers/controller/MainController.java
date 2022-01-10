@@ -2,7 +2,6 @@ package com.easypayment.gerenciadorusers.controller;
 
 import com.easypayment.gerenciadorusers.dto.JwtDto;
 import com.easypayment.gerenciadorusers.dto.MessageDto;
-import com.easypayment.gerenciadorusers.entity.User;
 import com.easypayment.gerenciadorusers.security.jwt.JwtProvider;
 import com.nimbusds.jose.shaded.json.parser.ParseException;
 import lombok.SneakyThrows;
