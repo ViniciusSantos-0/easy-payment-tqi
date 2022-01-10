@@ -5,7 +5,11 @@
 export const environment = {
   production: false,
   UserPoolId: 'us-east-2_2qy3PnCRC',
-  ClientId: '7t7f12okldhsjfifui4k9j5rr2'
+  ClientId: '7t7f12okldhsjfifui4k9j5rr2',
+  springURL: 'http://localhost:8080/',
+  ACCESS_TOKEN: 'accessToken',
+  AUTHORIZATION: 'Authorization',
+  BEARER: 'Bearer '
 };
 
 /*

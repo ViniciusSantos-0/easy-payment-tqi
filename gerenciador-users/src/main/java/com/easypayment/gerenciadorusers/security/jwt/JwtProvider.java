@@ -21,6 +21,7 @@ import org.springframework.stereotype.Component;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 @Slf4j
@@ -29,7 +30,7 @@ public class JwtProvider {
     private static final String USERNAME_FIELD = "username";
     private static final String BEARER = "Bearer ";
     private static final String AUTHORIZATION = "Authorization";
-    private static final String ROLES = "ROLE_USER";
+    private static final String rolesFiled = "cognito:groups";
 
     @Value("${com.easypayment.jwt.aws.identityPoolUrl}")
     private String identityPoolUrl;
@@ -40,9 +41,7 @@ public class JwtProvider {
     @Autowired
     ConfigurableJWTProcessor configurableJWTProcessor;
 
-    private String getToken (String token) {
-        return token.startsWith(BEARER)? token.substring(BEARER.length()) : token;
-    }
+
 
     public Authentication authenticate(HttpServletRequest request) throws Exception {
         String token = request.getHeader(AUTHORIZATION);
@@ -52,7 +51,10 @@ public class JwtProvider {
             String username = getUserName(claims);
             if(username != null){
                 // TODO set roles
-                List<GrantedAuthority> authorities = List.of(new SimpleGrantedAuthority(ROLES));
+                String roles = getRoles(claims);
+                List<GrantedAuthority> authorities =
+                        rolesToList(roles).stream().map(rol -> new SimpleGrantedAuthority(rol)).collect(Collectors.toList());
+                log.info(authorities.toString());
                 User user = new User(username, "", authorities);
                 return new JwtAuthenticator(authorities, user, claims);
             }
@@ -78,11 +80,11 @@ public class JwtProvider {
             JWT jwt = JWTParser.parse(jwtDto.getToken());
             JWTClaimsSet claims = jwt.getJWTClaimsSet();
             String username = claims.getSubject();
-            List<String> roles = (List<String>) claims.getClaim(ROLES);
+            List<String> roles = (List<String>) claims.getClaim(rolesFiled);
 
             return Jwts.builder()
                     .setSubject(username)
-                    .claim(ROLES, roles)
+                    .claim(rolesFiled, roles)
                     .setIssuedAt(new Date())
                     .setExpiration(new Date(new Date().getTime() + expiration))
                     .signWith(SignatureAlgorithm.RS256, identityPoolUrl.getBytes())
@@ -90,6 +92,19 @@ public class JwtProvider {
         }
         return null;
     }
+    private String getToken (String token) {
+        return token.startsWith(BEARER)? token.substring(BEARER.length()) : token;
+    }
 
+    private String getRoles(JWTClaimsSet claims) {
+        return claims.getClaim(rolesFiled).toString();
+    }
 
+    private List<String> rolesToList(String roles) {
+        String noSquare = roles.replace("[", "");
+        noSquare = noSquare.replace("]", "");
+        String noQuotes = noSquare.replace("\"", "");
+        String noSpaces = noQuotes.replace(" ", "");
+        return List.of(noSpaces.split(","));
+    }
 }

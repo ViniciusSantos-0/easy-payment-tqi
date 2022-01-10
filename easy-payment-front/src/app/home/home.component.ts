@@ -1,7 +1,10 @@
+import { identifierModuleUrl } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CognitoUserAttribute, CognitoUserPool } from 'amazon-cognito-identity-js';
 import { environment } from 'src/environments/environment';
+import { ApiRestService } from '../services/api-rest.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -10,6 +13,9 @@ import { environment } from 'src/environments/environment';
 })
 export class HomeComponent implements OnInit {
 
+  message: string;
+
+
   attributes: CognitoUserAttribute[];
   poolData = {
     UserPoolId: environment.UserPoolId, // Your user pool id here
@@ -17,10 +23,17 @@ export class HomeComponent implements OnInit {
   };
 
   constructor(
-    private router: Router
+    private router: Router,
+    private apiRestService: ApiRestService,
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
+    if (this.authService.isAdmin()) {
+      this.messageHelloAdmin();
+    } else {
+      this.messageHelloUser();
+    }
   }
 
   onLogout(): void {
@@ -48,5 +61,20 @@ export class HomeComponent implements OnInit {
       });
     });
   }
-
+  messageHelloAdmin(): void {
+    this.apiRestService.getHelloAdmin().subscribe(data => {
+      this.message = data.message;
+    },
+      err => {
+        alert(err.message || JSON.stringify(err));
+      })
+  }
+  messageHelloUser(): void {
+    this.apiRestService.getHelloUser().subscribe(data => {
+      this.message = data.message;
+    },
+      err => {
+        alert(err.message || JSON.stringify(err));
+      })
+  }
 }

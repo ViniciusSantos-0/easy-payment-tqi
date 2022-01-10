@@ -10,6 +10,7 @@ import { SignupComponent } from './signup/signup.component';
 
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { interceptorStringProvider } from './interceptors/api-rest.interceptor';
 
 
 @NgModule({
@@ -26,7 +27,7 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [interceptorStringProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
