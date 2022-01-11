@@ -1,4 +1,8 @@
 # easy-payment-tqi
+
+Simulando uma empresa de emprestimos, que denominei por Easy Payment, essa empresa quer um sistema para poder facilitar a vida de seus clientes
+na hora de pedir um emprestimo, então elaborei a seguinte solução:
+
 !!Warning projeto imcompleto.
 
 A solução que pensei para o desafio proposto foi de criar microserviços
@@ -24,4 +28,17 @@ Docker: para criar image do projeto, para rodar o postgres,
 Heruku: dar deploy da aplicação.
 
 Emprestimo irá ser respospavel por tratar as requições de emprestimo do usuário.
+
+Para rodar a aplicação precisa ter o angular instalado e o jdk;
+
+comando no front: ng serve -o
+
+irá rodar a aplicação,
+o backend roda com o intellij no spring boot na porta 8080 do localhost: http://localhost:8080
+caso logar e aparecer esse erro: Http failure response for http://localhost:8080/hello-user: 0 Unknown Error
+é por que o backend não foi iniciado.
+todos que se inscrever terá o perfil de user, só tem uma conta ADM (não vai precisar da conta adm, pois não consegui implementar a tempo, com o user já dá para ver até onde fui).
+
+Não consegui terminar a tempo o projeto por circustancias adversas, porém irei finalizar esse projeto, e deixarei ele completo, Obrigado por sua atenção se chegou a ler até aqui #ainda vou ser tqi.
+
 
