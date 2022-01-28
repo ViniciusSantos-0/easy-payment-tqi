@@ -39,6 +39,5 @@ caso logar e aparecer esse erro: Http failure response for http://localhost:8080
 é por que o backend não foi iniciado.
 todos que se inscrever terá o perfil de user, só tem uma conta ADM (não vai precisar da conta adm, pois não consegui implementar a tempo, com o user já dá para ver até onde fui).
 
-Não consegui terminar a tempo o projeto por circustancias adversas, porém irei finalizar esse projeto, e deixarei ele completo, Obrigado por sua atenção se chegou a ler até aqui #ainda vou ser tqi.
 
 
